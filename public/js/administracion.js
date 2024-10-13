@@ -5,8 +5,20 @@ const mostrarMensaje = (mensaje) => {
     contMensaje.innerHTML = mensaje
     const toastBootstrap = bootstrap.Toast.getOrCreateInstance(mytoast)
     toastBootstrap.show()
+
 }
 // mostrarMensaje('Buen dia')
+
+const mostrarMensajeEnLinea = (mensaje, tipo) => {
+    const contMensaje = document.querySelector('#msj')
+    switch (tipo) {
+        case 1: contMensaje.className += " bg-success rounded-2";
+            break; 
+        case 2: contMensaje.className += " bg-danger rounded-2";
+                break;
+    }
+    contMensaje.innerHTML = mensaje
+    }
 
 //mostrar formularios Agregar producto
 const btnAgregar = document.querySelector('#verFormNuevoProd')
@@ -32,11 +44,12 @@ const cerrarFormulario = (formularioNro) => {
 }
 
 // mostrar productos
-const endpoint = 'http://localhost:3000/productos' // a donde voy a solicitar los datos
+const endpoint = 'https://apirestjson.onrender.com' 
+// const endpoint = 'http://localhost:3000/productos' // a donde voy a solicitar los datos
 // const endpoint = './json/datos.json' // a donde voy a solicitar los datos
 const contenedor = document.querySelector('#cont-prod') // quien necesita los datos
-var productos = '' // los datos finales que le voy a entregar al contenedor
-var productosRecibidos
+let productos = '' // los datos finales que le voy a entregar al contenedor
+// var productosRecibidos
 const obtenerDatos = async () => {
     try {
         const respuesta = await fetch(endpoint); //solicito datos
@@ -68,6 +81,8 @@ const obtenerDatos = async () => {
 
     } catch (error) {
         // console.log(error)
+        // document.querySelector('#msj').innerHTML = 'Error al Cargar los producto';
+        mostrarMensajeEnLinea('Error al Cargar los producto', 2)
         mostrarMensaje('Error al Cargar los producto')
     }
 
@@ -120,17 +135,19 @@ formulario.addEventListener('submit', (event) => {
 
             //mostrar mensaje nuevo producto ingresado
             mostrarMensaje(respuesta.mensaje)
+            mostrarMensajeEnLinea(respuesta.mensaje, 1)
 
         } catch (error) {
             // console.log(error)
             mostrarMensaje('Error al crear nuevo producto')
+            mostrarMensajeEnLinea('Error al crear nuevo producto', 2)
         }
 
         document.querySelector('#formNuevoProducto').reset(); //limpia formulario
 
         document.querySelector('#nuevoProd').style.display = 'none' //ocultar formulario
 
-        setTimeout(() => { location.reload(); }, 1000)    // refrescar productos
+        setTimeout(() => { location.reload(); }, 1500)    // refrescar pagina
         // location.reload();
 
     }
@@ -163,7 +180,6 @@ const editarProductoFront = (id) => {
     formEditar.nombre.value = productoEditar.nbr
     formEditar.descripcion.value = productoEditar.descripcion
     formEditar.precio.value = productoEditar.precio
-
 
     // console.log(productoEditar)
     // console.log(formEditar.idEditar.value)
@@ -203,7 +219,7 @@ formEditar.addEventListener('submit', (event) => {
 
     //convierto el objeto a json para enviarlo a traves de la API fetch al backend
     let nuevosDatosJson = JSON.stringify(nuevosDatos)
-    console.log(nuevosDatosJson)
+    // console.log(nuevosDatosJson)
 
     //envio los datos al backend
     const enviarNvoDatos = async () => {
@@ -219,7 +235,7 @@ formEditar.addEventListener('submit', (event) => {
             const respuesta = await enviarDatos.json()
             //console.log(respuesta)
 
-            //mostrar mensaje nuevo producto ingresado
+            //mostrar mensaje producto ACTUALIZADO
             mostrarMensaje(respuesta.mensaje)
 
         } catch (error) {
@@ -227,9 +243,9 @@ formEditar.addEventListener('submit', (event) => {
             mostrarMensaje('Error al ACTUALIZAR producto')
         }
 
-        document.querySelector('#formNuevoProducto').reset(); //limpia formulario
+        document.querySelector('#formEditar').reset(); //limpia formulario
 
-        document.querySelector('#nuevoProd').style.display = 'none' //ocultar formulario
+        document.querySelector('#formEditar').style.display = 'none' //ocultar formulario
 
         setTimeout(() => { location.reload(); }, 1000)    // refrescar productos
         // location.reload();
@@ -256,7 +272,7 @@ const eliminar = (id) => {
                 const respuesta = await res.json()
                 // console.log(respuesta)
 
-                //mostrar mensaje nuevo producto ingresado
+                //mostrar mensaje producto ELIMINADO
                 mostrarMensaje(respuesta.mensaje)
 
             } catch (error) {

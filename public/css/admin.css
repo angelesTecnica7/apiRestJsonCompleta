@@ -5,3 +5,10 @@ body {
 #nuevoProd, #editarProd {
     display: none;
 }
+
+#msj {
+    position: fixed;
+    top: 100px;
+    left: 5px;
+    z-index: 3000;
+}
