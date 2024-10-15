@@ -1,4 +1,4 @@
-const endpoint = 'https://apirestjson.onrender.com' 
+const endpoint = 'https://apirestjson.onrender.com/productos' 
 // const endpoint = 'http://localhost:3000/productos' // a donde voy a solicitar los datos
 const contenedor = document.querySelector('#cont-prod') // quien necesita los datos
 var productos = '' // los datos finales que le voy a entregar al contenedor

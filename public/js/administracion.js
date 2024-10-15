@@ -44,7 +44,7 @@ const cerrarFormulario = (formularioNro) => {
 }
 
 // mostrar productos
-const endpoint = 'https://apirestjson.onrender.com' 
+const endpoint = 'https://apirestjson.onrender.com/productos' 
 // const endpoint = 'http://localhost:3000/productos' // a donde voy a solicitar los datos
 // const endpoint = './json/datos.json' // a donde voy a solicitar los datos
 const contenedor = document.querySelector('#cont-prod') // quien necesita los datos
