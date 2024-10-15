@@ -1,6 +1,6 @@
-// const endpoint = 'http://localhost:3000/productos'
-// const endpoint = './json/datos.json'
-const endpoint = './../data/datos.json' // no funciona con el servidor porque solo se ve el souce (la rama) dentro del public. SIN FUNCIONA CON LIVE SERVER
+// const endpoint = 'http://localhost:3000/productos' // con una api rest en backend, es el app.get()
+// const endpoint = './json/datos.json' // en local ejecutando con live server
+const endpoint = './../data/datos.json' // no funciona con el servidor (backend) porque solo se ve el souce (la rama) dentro del public. SIN FUNCIONA CON LIVE SERVER
 
 //1ra forma sincronica SIN PROMESAS
 fetch(endpoint)  //solicitud de datos en este endpoint

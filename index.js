@@ -12,7 +12,7 @@ app.use(express.static('./public')) //carpeta que contiene el front
 
 const leerDatos = () => {
     try {
-        const datos = fs.readFileSync('./data/datos.json')
+        const datos = fs.readFileSync('./public/data/datos.json')
         return JSON.parse(datos)
     } catch (error) {
         console.log(error)
@@ -22,7 +22,7 @@ const leerDatos = () => {
 
 const escribirDatos = (datos) => {
     try {
-        fs.writeFileSync('./data/datos.json', JSON.stringify(datos))
+        fs.writeFileSync('./public/data/datos.json', JSON.stringify(datos))
     } catch (error) {
         console.log(error)
     }
